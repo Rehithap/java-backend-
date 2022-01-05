@@ -92,8 +92,7 @@ public class CollectionDemo {
 
     public static void main(String[] args) {
         CollectionDemo cdm = new CollectionDemo();
-//        cdm.listDemo();
-//        cdm.setDemo();
+
         System.out.println("----- List Demo -----");
         cdm.listDemo();
         System.out.println("----- Set Demo -----");
