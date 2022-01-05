@@ -16,7 +16,7 @@ public class CollectionDemo {
         names.add(null);
         names.add("xyz");
 
-        Consumer<String> cls = new Consumer<String>() { // anonymous inner class -> traditional approach
+        Consumer<String> cls = new Consumer<String>() { 
             @Override
             public void accept(String s) {
                 System.out.println("Name is " + s);
@@ -24,7 +24,7 @@ public class CollectionDemo {
         };
         names.forEach(cls);
 
-        Consumer<String> fn = (String s) -> System.out.println(s); // functional interface -> java8 and above approach
+        Consumer<String> fn = (String s) -> System.out.println(s); 
         names.forEach(fn);
 
         return names;
