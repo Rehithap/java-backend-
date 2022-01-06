@@ -20,5 +20,4 @@ public class Connectivity {
     public Connection getConnection() {
         return connection;
     }
-
 }
