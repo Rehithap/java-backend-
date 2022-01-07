@@ -1,3 +1,5 @@
+package service;
+
 import db.Connectivity;
 import service.DbService;
 
@@ -13,15 +15,21 @@ public class Main {
             Connectivity connectivity = new Connectivity();
 
             DbService service = new DbService(connectivity.getConnection());
-            int cnt = service.create(
-                    2,
-                    "pqr",
-                    Date.valueOf(LocalDate.now()),
-                    true
-            );
-            if(cnt > 0) {
-                System.out.println("Employee Created Successfully");
-            }
+//            int cnt = service.create(
+//                    7,
+//                    "klm",
+//                    Date.valueOf(LocalDate.now()),
+//                    true
+//            );
+//            if(cnt > 0) {
+//                System.out.println("Employee Created Successfully");
+//            }
+
+//            service.find();
+
+//            service.findEmployeeByName("abc");
+
+            service.txnDemo(60, "kol", Date.valueOf(LocalDate.now()), true, 100);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
