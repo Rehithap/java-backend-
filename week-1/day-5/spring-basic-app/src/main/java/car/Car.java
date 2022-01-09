@@ -1,7 +1,6 @@
 package car;
 
 public class Car {
-
     private String model;
 
     public String getModel() {
