@@ -1,5 +1,7 @@
+com\ani\car\Bwm.class
 com\ani\Main.class
 com\ani\tempo\Tempo.class
 com\ani\config\AppConfig.class
+com\ani\logging\CarLogger.class
 com\ani\driver\Driver.class
 com\ani\car\Car.class
