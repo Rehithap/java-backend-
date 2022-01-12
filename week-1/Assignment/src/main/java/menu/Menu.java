@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class Menu {
 
     private final DbService service;
-
     public Menu() throws SQLException {
 
         var connectivity = new Connectivity();
@@ -19,43 +18,170 @@ public class Menu {
     }
 
     private String prepareMenu() {
-        String title = "\n --- Banking System ---";
+        String title = "\n --- Bank Operations ---";
         String m1 = "\n 1. Create New Account";
         String m2 = "\n 2. Show All Accounts";
-        String m3 = "\n 3. Exit";
+        String m3 = "\n 3. Display Balance";
+        String m4 = "\n 4. Transfer";
+        String m5 = "\n 5. withdraw";
+        String m6 = "\n 6. deposit";
+        String m7 = "\n 7. status";
+        String m8 = "\n 8. Exit";
 
-        return title + m1 + m2 + m3;
+        return title + m1 + m2 + m3 + m4 +m5 +m6 + m7 +m8 ;
+    }
+    private String Usermenu() {
+        String title = "\n --- User Menu ---";
+
+        String m1 = "\n 1. Display Balance";
+        String m2 = "\n 2. Transfer";
+        String m3 = "\n 3. withdraw";
+        String m4 = "\n 4. deposit";
+
+        String m5 = "\n 5. Exit";
+
+        return title + m1 + m2 + m3 + m4 +m5  ;
+    }
+    private String Mainmenu() {
+        String title="\n ----MENU------";
+        String m1="\n 1.Admin";
+        String m2="\n 2.User ";
+        String m3="\n 3.Exit";
+        return title +m1+m2+m3;
     }
 
     public void showMenu() {
         var scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println(prepareMenu());
-            int ch = scanner.nextInt();
+        System.out.println(Mainmenu());
+        int ch1 = scanner.nextInt();
+        if (ch1 == 3) System.exit(1);
+        if(ch1==2) {
+            while (true) {
+                System.out.println(Usermenu());
+                int ch3 = scanner.nextInt();
+                if (ch3 == 5) System.exit(1);
+                if(ch3==4){
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+                    try {
+                        service.Depositamount(acNum);
 
-            if (ch == 3) System.exit(1);
-            if (ch == 1) {
-                System.out.println("Enter Account Number : ");
-                int acNum = scanner.nextInt();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
 
-                System.out.println("Enter Balance : ");
-                double amt = scanner.nextDouble();
-
-                System.out.println("Enter Name : ");
-                String name = scanner.nextLine();
-
-                try {
-                    service.createNewAccount(
-                            acNum,
-                            amt,
-                            name,
-                            Date.valueOf(LocalDate.now()),
-                            false
-                    );
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
+                if(ch3==3) {
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+                    try {
+                        service.Withdrawamount(acNum);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if(ch3==1){
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+                    try {
+                        service.Displaybalance(acNum);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
             }
         }
+        if (ch1 == 1) {
+
+            // var scanner = new Scanner(System.in);
+            while (true) {
+                System.out.println(prepareMenu());
+                int ch = scanner.nextInt();
+
+                if (ch == 8) System.exit(1);
+                if (ch == 1) {
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+
+                    System.out.println("Enter Balance : ");
+                    double amt = scanner.nextDouble();
+
+                    System.out.println("Enter Name : ");
+                    String acHldNm = scanner.next();
+
+                    try {
+                        service.createNewAccount(
+                                acNum,
+                                amt,
+                                acHldNm,
+                                Date.valueOf(LocalDate.now()),
+                                true
+                        );
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (ch == 2) {
+
+
+                    try {
+                        service.printAllAccounts();
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (ch == 3) {
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+                    try {
+                        service.Displaybalance(acNum);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if(ch==5) {
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+                    try {
+                        service.Withdrawamount(acNum);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                if(ch==6) {
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+                    try {
+                        service.Depositamount(acNum);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                if(ch==7){
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+                    try {
+                        service.Displaystatus(acNum);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }
+
     }
+
 }
