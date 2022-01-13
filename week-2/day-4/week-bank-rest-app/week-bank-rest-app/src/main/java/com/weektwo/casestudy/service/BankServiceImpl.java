@@ -20,7 +20,7 @@ import java.util.Optional;
         noRollbackFor = InvalidAmountException.class
 )
 @Service
-public class BankServiceImpl implements BankService{
+public class BankServiceImpl implements BankService {
 
     private final Logger logger = LoggerFactory.getLogger(BankServiceImpl.class);
 
@@ -49,8 +49,8 @@ public class BankServiceImpl implements BankService{
 
     @Override
     public double withdraw(Long acNum, double amt) throws InvalidAmountException {
-        logger.info("Withdrawing Money from "+acNum +" with Amount  "+amt);
-        logger.warn("Make sure amount positive");
+        logger.info("Withdrawing Money from " + acNum + " with Amount  " + amt);
+        logger.warn("Make sure amount possittive");
         repository.withdraw(amt, acNum);
         return amt;
     }
@@ -60,7 +60,7 @@ public class BankServiceImpl implements BankService{
         // just explanation I am using this strategy
         // it can be done in more efficient way
 
-        if(amt <= 0) throw new InvalidAmountException("Amount Should be Non Zero Positive "+amt);
+        if (amt <= 0) throw new InvalidAmountException("Amount Should be Non Zero Positive " + amt);
 
         Optional<BankAccount> op = repository.findById(acNum);
 
