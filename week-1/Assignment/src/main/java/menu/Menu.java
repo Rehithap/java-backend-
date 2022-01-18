@@ -28,9 +28,9 @@ public class Menu {
         String m7 = "\n 7. status";
         String m8 = "\n 8. Exit";
 
-        return title + m1 + m2 + m3 + m4 +m5 +m6 + m7 +m8 ;
+        return title + m1 + m2 + m3 + m4 +m5 +m6 + m7 + m8 ;
     }
-    private String Usermenu() {
+    private String userMenu() {
         String title = "\n --- User Menu ---";
 
         String m1 = "\n 1. Display Balance";
@@ -42,7 +42,7 @@ public class Menu {
 
         return title + m1 + m2 + m3 + m4 +m5  ;
     }
-    private String Mainmenu() {
+    private String mainMenu() {
         String title="\n ----MENU------";
         String m1="\n 1.Admin";
         String m2="\n 2.User ";
@@ -52,12 +52,12 @@ public class Menu {
 
     public void showMenu() {
         var scanner = new Scanner(System.in);
-        System.out.println(Mainmenu());
+        System.out.println(mainMenu());
         int ch1 = scanner.nextInt();
         if (ch1 == 3) System.exit(1);
         if(ch1==2) {
             while (true) {
-                System.out.println(Usermenu());
+                System.out.println(userMenu());
                 int ch3 = scanner.nextInt();
                 if (ch3 == 5) System.exit(1);
                 if(ch3==4){
