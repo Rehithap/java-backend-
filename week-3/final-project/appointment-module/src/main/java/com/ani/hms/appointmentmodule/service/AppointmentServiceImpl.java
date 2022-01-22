@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -62,6 +64,26 @@ public class AppointmentServiceImpl implements AppointmentService{
         apNew.setDoctorName(apOld.getDoctorName());
         repository.save(apNew);
         return apNew.getType();
+    }
+
+    @Override
+    public List<AppointmentDto> getDaysBetweenDates(LocalDate start, LocalDate end){
+        List<Appointment> app=repository.findByAppointmentBetween(start,end);
+        List<AppointmentDto> appdto = new ArrayList<>();
+        for(int i=0;i<app.size();i++)
+        {
+            Appointment apps= app.get(i);
+            AppointmentDto dto=new AppointmentDto(
+                    apps.getId(),
+                    apps.getType(),
+                    apps.getPlaced(),
+                    apps.getAppointment(),
+                    apps.getDoctorName()
+
+            );
+            appdto.add(dto);
+        }
+        return appdto;
     }
 
 }
