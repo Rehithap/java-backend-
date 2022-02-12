@@ -2,10 +2,14 @@ package com.ani.hms.appointmentmodule.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.time.LocalDate;
+
 
 @AllArgsConstructor
 @Setter

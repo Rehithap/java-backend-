@@ -4,9 +4,9 @@ import com.ani.hms.appointmentmodule.domain.Appointment;
 import com.ani.hms.appointmentmodule.dto.AppointmentDto;
 import com.ani.hms.appointmentmodule.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,20 +19,22 @@ public class AppointmentServiceImpl implements AppointmentService{
 
     @Override
     public AppointmentDto createAppointment(AppointmentDto dto) {
-
-        var appointment=new Appointment();
-        appointment.setType(dto.getType());
-        appointment.setAppointment(dto.getAppointment());
-        appointment.setPlaced(dto.getPlaced());
-        appointment.setDoctorName(dto.getDoctorName());
-
-        repository.save(appointment);
-        return dto;
+        //try{
+            var appointment=new Appointment();
+            appointment.setType(dto.getType());
+            appointment.setAppointment(dto.getAppointment());
+            appointment.setPlaced(dto.getPlaced());
+            appointment.setDoctorName(dto.getDoctorName());
+            repository.save(appointment);
+            return dto;
+   // }
+    //catch (DataIntegrityViolationException e) {
+        //throw new DuplicateException("You have entered duplicate key value");
     }
 
     @Override
 
-    public LocalDate setAppointment(Long id,LocalDate appointment) {
+    public LocalDate updateAppointment(Long id,LocalDate appointment) {
         Optional<Appointment> op = repository.findById(id);
         Appointment baOld=op.orElseThrow();
 
@@ -62,8 +64,11 @@ public class AppointmentServiceImpl implements AppointmentService{
         apNew.setType(newType);
         apNew.setPlaced(apOld.getPlaced());
         apNew.setDoctorName(apOld.getDoctorName());
+
         repository.save(apNew);
+
         return apNew.getType();
+
     }
 
     @Override
@@ -85,5 +90,21 @@ public class AppointmentServiceImpl implements AppointmentService{
         }
         return appdto;
     }
+
+    @Override
+    public void findAppointmentById(long l) {
+
+    }
+
+
+    @Override
+
+    public List<Appointment> searchAppointmentsByTypeName(String s) {
+
+        List<Appointment> list = repository.findByTypeName(s);
+
+        return list;
+    }
+
 
 }

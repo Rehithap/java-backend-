@@ -1,4 +1,5 @@
 package com.ani.hms.appointmentmodule.controller;
+import com.ani.hms.appointmentmodule.domain.Appointment;
 import com.ani.hms.appointmentmodule.dto.AppResponse;
 import com.ani.hms.appointmentmodule.dto.AppointmentBetweenDto;
 import com.ani.hms.appointmentmodule.dto.AppointmentDto;
@@ -20,23 +21,42 @@ public class AppointmentController {
     @PostMapping
     public ResponseEntity<AppResponse<AppointmentDto>> createAppointment(@RequestBody AppointmentDto dto) {
 
-        var svObj = service.createAppointment(dto);
-        var response = new AppResponse<AppointmentDto>();
-        response.setStatus("success");
-        response.setMessage("Appointment saved successfully");
-        response.setBody(svObj);
-        return ResponseEntity.ok(response);
+            var svObj = service.createAppointment(dto);
+            var response = new AppResponse<AppointmentDto>();
+            response.setStatus("success");
+            response.setMessage("Appointment saved successfully");
+            response.setBody(svObj);
+            return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/setAppoint")
+
+    @PutMapping("/updateAppoint")
     public ResponseEntity<AppResponse<Date>> activate(@RequestBody AppointmentDto dto) {
-        LocalDate stat = service.setAppointment(dto.getId(),dto.getAppointment());
+        LocalDate stat = service.updateAppointment(dto.getId(),dto.getAppointment());
         var response = new AppResponse<Date>();
         response.setMessage("Appointment is updated");
         response.setStatus("successfully appointment is updated to" + stat.toString());
 //        response.setBody("successfully appointment is updated to" + stat.toString());
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
+
+    /* @PutMapping("/updateAppoint")
+public ResponseEntity<AppResponse<String>> updateAppointment(@RequestBody AppointmentDto dto) {
+    try {
+        AppointmentDto stat = service.updateAppointment(dto);
+        var response = new AppResponse<String>();
+        response.setMessage("Appointment is updated");
+        response.setStatus("success");
+        response.setBody(String.valueOf(stat));
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+    } catch (InvalidIdException e) {
+        var response = new AppResponse<AppointmentDto>();
+        response.setStatus("fail");
+        response.setMessage(e.getMessage());
+        return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+    }
+}
+    */
     @PutMapping("/cancelAppoint")
     public ResponseEntity<AppResponse<String>> cancelAppointment(@RequestBody AppointmentDto dto) {
         String stat = service.cancelAppointment(dto.getId(), dto.getType());
@@ -46,6 +66,26 @@ public class AppointmentController {
         response.setBody(stat);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
+/*
+    @PutMapping("/cancelAppointment")
+    public ResponseEntity<AppResponse<String>> cancelAppointment(@RequestBody AppointmentDto dto) {
+        try {
+            String stat = service.cancelAppointment(dto.getId());
+            var response = new AppResponse<String>();
+            response.setMessage("Appointment is removed");
+            response.setStatus("success");
+            response.setBody(stat);
+            return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+        }
+        catch (InvalidIdException e){
+            var response = new AppResponse<AppointmentDto>();
+            response.setStatus("fail");
+            response.setMessage(e.getMessage());
+            return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+ */
 
     @GetMapping("/between")
     public ResponseEntity<AppResponse<List<AppointmentDto>>> findbetween(@RequestBody AppointmentBetweenDto dto){
@@ -55,4 +95,20 @@ public class AppointmentController {
         response.setBody(service.getDaysBetweenDates(dto.getStart(),dto.getEnd()));
         return  ResponseEntity.ok(response);
     }
+
+
+    @GetMapping("/searchByType")
+    public ResponseEntity<AppResponse<String>> searchAppointmentByTypeName(@RequestBody Appointment dto) {
+        List<Appointment> list=service.searchAppointmentsByTypeName(dto.getTypeName());
+        var response = new AppResponse<String>();
+        response.setStatus("success");
+        response.setStatus("Appointment by Type Name");
+        response.setList(list);
+        //response.setBody(service.get);
+        return new ResponseEntity(response,HttpStatus.ACCEPTED);
+    }
+
+
+
+
 }

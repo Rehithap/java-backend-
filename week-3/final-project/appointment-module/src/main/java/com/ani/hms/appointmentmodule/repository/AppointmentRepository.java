@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long>{
     List<Appointment> findByAppointmentBetween(LocalDate start, LocalDate end);
+
+    List<Appointment> findByTypeName(String s);
 }
