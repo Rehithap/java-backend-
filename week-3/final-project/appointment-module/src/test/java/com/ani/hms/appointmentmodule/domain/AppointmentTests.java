@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class AppointmentTests {
+
     @DisplayName("Domain : Checking Object Creation")
     @Test
     void testObjectCreation() {
