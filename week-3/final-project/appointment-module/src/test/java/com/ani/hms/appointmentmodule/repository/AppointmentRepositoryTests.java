@@ -8,32 +8,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import java.time.LocalDate;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class AppointmentRepository {
+public class AppointmentRepositoryTests {
     @Autowired
     private AppointmentRepository repository;
 
     @DisplayName("Appointment repo : creating ")
     @Test
     public void testCreateAppointment() {
-        var app = new Appointment();
-        app.setId(15L);
-        app.setType("ipd");
-        app.setAppointment(LocalDate.now());
-        app.setDoctorName("abc");
-        app.setPlaced(LocalDate.now());
-        repository.save(app);
+        var appointment = new Appointment();
+        appointment.setId(49L);
+        appointment.setType("cancer");
+        appointment.setAppointment(LocalDate.now());
+        appointment.setDoctorName("sandeep");
+        appointment.setPlaced(LocalDate.now());
 
-    }
+        repository.save(appointment);
 
-    private void save(Appointment app) {
-    }
-
-    public void findByAppointmentBetween(LocalDate st, LocalDate ed) {
     }
 }

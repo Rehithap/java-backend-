@@ -1,6 +1,5 @@
 package com.ani.hms.appointmentmodule.dto;
 
-
 import com.ani.hms.appointmentmodule.domain.Appointment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,12 +13,22 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
+
 public class AppResponse<T> {
     private String status;
     private String message;
     private T body;
+    private List<Appointment> list;
 
-    public void setList(List<Appointment> list) {
-    }
+
+    //  public void setStatus(String status) {
+    // }
+
+    //  public void setStatus(LocalDate stat) {
+    //  }
+
+    //  public void setList(List<Appointment> list) {
+    //}
 
 }
+

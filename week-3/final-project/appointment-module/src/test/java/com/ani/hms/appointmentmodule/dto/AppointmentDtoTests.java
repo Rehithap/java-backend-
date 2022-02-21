@@ -1,10 +1,9 @@
 package com.ani.hms.appointmentmodule.dto;
 
-
-import com.ani.hms.appointmentmodule.domain.Appointment;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 
 public class AppointmentDtoTests {
@@ -13,7 +12,7 @@ public class AppointmentDtoTests {
     void testObjectCreation() {
         LocalDate dt = LocalDate.now();
         LocalDate dt2 = LocalDate.now();
-        var abc = new AppointmentDto(1l,"gg",dt,dt2,"hhh");
+        var abc = new AppointmentDto(49l,"blood cancer",dt,dt2,"sandeep");
         Assertions.assertNotNull(abc);
     }
 
@@ -22,10 +21,11 @@ public class AppointmentDtoTests {
     void testObjectCreation2() {
         LocalDate dt = LocalDate.now();
         LocalDate dt2 = LocalDate.now();
-        var abc = new AppointmentDto(1l,"gg",dt,dt2,"hhh");
-        Assertions.assertEquals("gg",abc.getType());
+        var abc = new AppointmentDto(49l,"cancer",dt,dt2,"sandeep");
+        Assertions.assertEquals(49,abc.getId());
+        Assertions.assertEquals("cancer",abc.getType());
         Assertions.assertEquals((LocalDate.now()) ,abc.getPlaced());
         Assertions.assertEquals((LocalDate.now()),abc.getAppointment());
-        Assertions.assertEquals("hhh",abc.getDoctorName());
+        Assertions.assertEquals("sandeep",abc.getDoctorName());
     }
 }
